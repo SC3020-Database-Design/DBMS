@@ -8,6 +8,11 @@ import java.util.Map;
  * This class is to encapsulate the logic for interactions between Disk and Block
  */
 class StorageManager {
+<<<<<<< HEAD
+=======
+    private int tombstones = 0;
+    private Map<Integer, ArrayList<Integer>> tombstonesByBlock = new HashMap<>();
+>>>>>>> 5789534 (refactor(BlockManager): Rename to StorageManager a Facade class encapsulating logic between Disk and Block)
     private Integer numRecords = 0;
     private int occupiedBlocks = 0;
     Disk disk;
@@ -54,10 +59,21 @@ class StorageManager {
      * @param record Record to delete
      */
     public void deleteRecord(Record r) {
+<<<<<<< HEAD
       Record recordTombstone = new Record(r.getUuid(), r.getAverageRating(), r.getNumVotes(), (short) 1);
       insertRecord(recordTombstone);
       if (numRecords * Record.RECORD_BYTE_SIZE >= (int) 0.9 * Disk.DISK_BYTE_SIZE) {
         runCompaction();
+=======
+      // Get (block #, record #) from default B tree;
+      // RecordTombstone tombstone = block.removeRecord(r.getUuid());
+      // ArrayList<Integer> blockTombstones = tombstones.getOrDefault(blockIndex, new ArrayList<>());
+      // blockTombstones.add(recordIndex);
+      // tombstonesByBlock.put(blockIndex, blockTombstones);
+      tombstones ++;
+      if (tombstones > Math.round(numRecords * 0.2)) {
+        // runCompaction();
+>>>>>>> 5789534 (refactor(BlockManager): Rename to StorageManager a Facade class encapsulating logic between Disk and Block)
       }
     }
 
@@ -75,6 +91,7 @@ class StorageManager {
     /**
      * Delete tombstones and reclaim space to reduce fragmentation. Tombstones are a result of updates or deletions.
      */
+<<<<<<< HEAD
     private void runCompaction() {
       int currentBlockNumber = 1;
       int currentIndexInBlock = 0;  // Index in the current block
@@ -103,6 +120,48 @@ class StorageManager {
           }
       }
   }
+=======
+  //   private void runCompaction() {
+  //     int currentBlockIndex = 0;  // Current block index
+  //     int currentIndexInBlock = 0;  // Index in the current block
+  //     int numBlocks = blocks.size();
+  
+  //     // Iterate through blocks and process tombstones
+  //     for (int i = 0; i < numBlocks; i++) {
+  //         Block currentBlock = blocks.get(i);
+  //         int numRecords = currentBlock.getRecordCount();
+  
+  //         // Iterate through records in the current block
+  //         for (int j = 0; j < numRecords; j++) {
+  //             Record record = currentBlock.getRecordAt(j);
+  //             if (!(record.isTombstone())) {
+  //                 // Move valid records to the current block and index in block
+  //                 blocks.get(currentBlockIndex).insertRecordAt(currentIndexInBlock, record);
+  //                 currentIndexInBlock++;
+  
+  //                 // If the current block is full, move to the next block
+  //                 if (blocks.get(currentBlockIndex).isFull()) {
+  //                     currentBlockIndex++;
+  //                     currentIndexInBlock = 0;
+  //                 }
+  //             } else {
+  //                 tombstones--;
+  //             }
+  //         }
+  //     }
+  
+  //     // Remove dangling blocks
+  //     blocks.subList(currentBlockIndex + 1, blocks.size()).clear();
+  
+  //     // Reset tombstones and update the B tree index
+  //     tombstonesByBlock.clear();
+  //     numRecords -= tombstones;
+  // }
+  
+  
+  
+
+>>>>>>> 5789534 (refactor(BlockManager): Rename to StorageManager a Facade class encapsulating logic between Disk and Block)
     public void printState(Boolean verbose) {
       System.out.println("#####\tPrinting state of BlockManager\t#####");
       if(verbose) {
