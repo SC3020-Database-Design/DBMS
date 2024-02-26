@@ -8,7 +8,7 @@ public class App {
         BlockManager blockManager = new BlockManager(recordManager.records);
         blockManager.printState(false);
         // Initialize default B tree using uuid(primary key)
-
+        Bplustree btree = new bplustree(3);
         // Initialize any other indexes the user has created
         
         // answer queries
