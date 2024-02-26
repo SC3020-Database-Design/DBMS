@@ -3,12 +3,20 @@
  * This class is to encapsulate the logic for interactions between Disk and Block
  */
 class StorageManager {
+<<<<<<< HEAD
     private Integer numRecords = 0;
     private int occupiedBlocks = 0;
     Disk disk;
+=======
+  private Integer numRecords = 0;
+  private int occupiedBlocks = 0;
+  Disk disk;
+  StorageConfiguration config;
+>>>>>>> e67eb14 (feat(StorageConfiguration): Add data class for storing storage config constants)
 
-  public StorageManager(Disk disk) {
+  public StorageManager(Disk disk, StorageConfiguration storageConfiguration) {
     this.disk = disk;
+    config = storageConfiguration;
   }
 
   /**
@@ -65,6 +73,7 @@ class StorageManager {
     return (float) (numRecords*Record.RECORD_BYTE_SIZE ) / Disk.DISK_BYTE_SIZE;
   }
 
+<<<<<<< HEAD
     /**
      * Delete tombstones and reclaim space to reduce fragmentation. Tombstones are a result of updates or deletions.
      */
@@ -88,6 +97,35 @@ class StorageManager {
               Block block = disk.getBlock(currentBlockNumber);
               block.insertRecordAt(currentIndexInBlock, record);
               currentIndexInBlock++;
+=======
+  /**
+   * Check if disk utilization is over 90%.
+   * If so delete tombstones and reclaim space to reduce fragmentation
+   */
+  private void checkAndRunCompaction() {
+    if (getDiskUtilization() < this.config.getCompactionThreshold()) {
+      return;
+    }
+    int currentBlockNumber = 1;
+    int currentIndexInBlock = 0;  // Index in the current block
+
+    // Iterate through blocks and process tombstones
+    for (int blockNumber = 1; blockNumber <= occupiedBlocks; blockNumber++) {
+        Block currentBlock = disk.getBlock(blockNumber);
+        int numRecords = currentBlock.getRecordCount();
+
+        // Iterate through records in the current block
+        for (int j = 0; j < numRecords; j++) {
+            Record record = currentBlock.getRecordAt(j);
+            if (record.isTombstone()) {
+              numRecords --;
+              continue;
+            }
+            // Move valid records to the current block and index in block
+            Block block = disk.getBlock(currentBlockNumber);
+            block.insertRecordAt(currentIndexInBlock, record);
+            currentIndexInBlock++;
+>>>>>>> e67eb14 (feat(StorageConfiguration): Add data class for storing storage config constants)
 
             if (block.isFull()) {
                 currentBlockNumber++;
