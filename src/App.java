@@ -7,7 +7,16 @@ public class App {
 
         // seed data
         String filePath = System.getProperty("user.dir") + "/data.tsv";
+<<<<<<< HEAD
         DataSeeder.seed(filePath, blockManager);
+=======
+        RecordManager recordManager = new RecordManager(filePath);
+        recordManager.printHead();
+        // Init disk memory
+        Disk disk = new Disk(Block.BLOCK_BYTE_SIZE);
+        // Put seed data into Blocks
+        StorageManager blockManager = new StorageManager(recordManager.records, disk);
+>>>>>>> e6310b1 (refactor(BlockManager): Rename to StorageManager a Facade class encapsulating logic between Disk and Block)
         blockManager.printState(false);
 
         // Initialize default B tree using uuid(primary key)
