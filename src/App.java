@@ -3,7 +3,7 @@ public class App {
         // Init disk memory
         Disk disk = new Disk(Block.BLOCK_BYTE_SIZE);
 
-        // Initialize default B tree using uuid(primary key)
+        // Initialize B+  tree
         BPlusTree bPlusTree = new BPlusTree(200);
 
         // Init storage related components

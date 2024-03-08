@@ -288,11 +288,16 @@ class StorageManager {
         }
     }
 
-//    public void updateRecordByPrimaryKey() {
-//        // Call readRecordByPrimaryKey
-//        // Call deleteRecord
-//        // Call insertRecord with the updated properties
-//    }
+    public void readRecordByPrimaryKey() {
+        // Get (block #, record #) from default B tree
+        // If valid block # and record # do constant time lookup. Otherwise do linear lookup.
+    }
+
+    public void updateRecordByPrimaryKey() {
+        // Call readRecordByPrimaryKey
+        // Call deleteRecord
+        // Call insertRecord with the updated properties
+    }
 
     /**
      * For simplicity assume all blocks are full
