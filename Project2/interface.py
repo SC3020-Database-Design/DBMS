@@ -66,6 +66,8 @@ class UI(QMainWindow):
     def setListDatabase(self, list_db=["TPC-H"]):
         self.list_database.clear()
         self.list_database.addItems(list_db)
+        # self.setListDatabase.clear()
+        # self.setListDatabase.addItems(list_db)
 
             
     # private events handling 
