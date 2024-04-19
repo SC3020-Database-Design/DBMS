@@ -1,3 +1,5 @@
 /bin
+Project2/venv
+Project2/__pycache__
 
 *.log
