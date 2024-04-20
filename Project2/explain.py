@@ -190,11 +190,6 @@ class Explainer:
         logging.info("Report generated.")
         return report
     
-    # def union_function(self, node):
-    #     if node["Node Type"] == "Merge Join":
-    #         return self.merge_join_function(node)
-    #     pass
-
     # def merge_join_function(self, node):
     #     left_rows, right_rows = node['Plan Rows'], node['Plan Rows']
     #     left_props, right_props = self.properties[node['Relation Name']], self.properties[node['Relation Name']]
