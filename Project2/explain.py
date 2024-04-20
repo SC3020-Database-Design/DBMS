@@ -188,6 +188,20 @@ class Explainer:
         report = json.dumps(analysis_results, indent=4)
         logging.info("Report generated.")
         return report
+    
+    # def union_function(self, node):
+    #     if node["Node Type"] == "Merge Join":
+    #         return self.merge_join_function(node)
+    #     pass
+
+    # def merge_join_function(self, node):
+    #     left_rows, right_rows = node['Plan Rows'], node['Plan Rows']
+    #     left_props, right_props = self.properties[node['Relation Name']], self.properties[node['Relation Name']]
+    #     left_pages, right_pages = left_props['pages'], right_props['pages']
+    #     left_tups, right_tups = left_props['tuples'], right_props['tuples']
+    #     left_cost = (left_pages * self.properties['seq_page_cost']) + (left_tups * self.properties['cpu_tuple_cost'])
+    #     right_cost = (right_pages * self.properties['seq_page_cost']) + (right_tups * self.properties['cpu_tuple_cost'])
+    #     return left_cost + right_cost
         
 class CostEstimator:
     SEQ_PAGE_COST = 1
