@@ -198,6 +198,15 @@ class Explainer:
     #     left_cost = (left_pages * self.properties['seq_page_cost']) + (left_tups * self.properties['cpu_tuple_cost'])
     #     right_cost = (right_pages * self.properties['seq_page_cost']) + (right_tups * self.properties['cpu_tuple_cost'])
     #     return left_cost + right_cost
+
+    # def intersect_function(self, node):
+    #     left_rows, right_rows = node['Plan Rows'], node['Plan Rows']
+    #     left_props, right_props = self.properties[node['Relation Name']], self.properties[node['Relation Name']]
+    #     left_pages, right_pages = left_props['pages'], right_props['pages']
+    #     left_tups, right_tups = left_props['tuples'], right_props['tuples']
+    #     left_cost = (left_pages * self.properties['seq_page_cost']) + (left_tups * self.properties['cpu_tuple_cost'])
+    #     right_cost = (right_pages * self.properties['seq_page_cost']) + (right_tups * self.properties['cpu_tuple_cost'])
+    #     return left_cost + right_cost
         
 class CostEstimator:
     def __init__(self, properties):
